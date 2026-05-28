@@ -12,9 +12,10 @@
       --ink-black: #000000;
       --paper-white: #f9f9f9;
       --grid-gray: #e0e0e0;
+      --text-color: #1a1a1a;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-user-select: none; user-select: none; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       background: var(--ink-black);
@@ -24,6 +25,10 @@
       overflow-x: hidden;
       font-family: 'Share Tech Mono', monospace;
       color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 20px 0;
     }
 
     /* --- LIQUID PARTICLE BACKGROUND --- */
@@ -51,42 +56,43 @@
     }
 
     /* --- MESSAGE CONTAINER --- */
-    #message-container {
+    #message-content {
       position: relative;
       z-index: 10;
-      overflow-y: visible;
-    }
-
-    #message-content {
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 60px 20px 100px;
+      width: 100%;
+      max-width: 520px;
+      padding: 20px;
+      margin-top: 40px;
     }
 
     .header-title {
       font-family: 'Share Tech Mono', monospace;
       color: #fff;
       text-align: center;
-      font-size: 1.2rem;
-      margin-bottom: 40px;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
       letter-spacing: 3px;
       opacity: 0.8;
+      text-transform: uppercase;
     }
 
     .letter-paper {
       background: var(--paper-white);
-      color: #1a1a1a;
+      color: var(--text-color);
       padding: 40px 30px;
       border-radius: 4px;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
       position: relative;
       min-height: 600px;
       background-image:
         linear-gradient(var(--grid-gray) 1px, transparent 1px),
         linear-gradient(90deg, var(--grid-gray) 1px, transparent 1px);
       background-size: 20px 20px;
+      /* Subtle paper texture overlay */
+      background-blend-mode: multiply;
     }
+    
     .letter-paper::before {
       content: '';
       position: absolute;
@@ -95,6 +101,7 @@
       bottom: 0;
       width: 2px;
       background: var(--c-blue);
+      opacity: 0.6;
     }
 
     .dateline {
@@ -103,25 +110,28 @@
       color: var(--c-blue);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       border-bottom: 1px dashed var(--c-blue);
       display: inline-block;
+      padding-right: 10px;
     }
 
     .greeting {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       color: var(--c-blue);
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       text-transform: uppercase;
+      line-height: 1.2;
     }
 
     .para {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 15px;
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
       color: #222;
+      text-align: justify;
     }
 
     .hidden-text {
@@ -131,27 +141,37 @@
       border-bottom: 1px dotted #555;
       color: transparent;
       background: rgba(0, 0, 0, 0.05);
-      padding: 0 2px;
-      transition: all 0.3s;
+      padding: 0 3px;
+      transition: all 0.3s ease;
       font-family: 'Share Tech Mono', monospace;
-      font-size: 0.9em;
+      font-size: 0.85em;
+      border-radius: 2px;
     }
+    
+    .hidden-text:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(3, 70, 148, 0.3);
+    }
+
     .hidden-text::after {
       content: '[?]';
       position: absolute;
-      right: -12px;
+      right: -14px;
       top: 50%;
       transform: translateY(-50%);
       font-size: 0.6rem;
       color: #888;
       opacity: 0.5;
+      pointer-events: none;
     }
+    
     .hidden-text.revealed,
     .hidden-text:hover {
       color: var(--c-blue) !important;
       background: rgba(3, 70, 148, 0.1);
       border-bottom: 1px solid var(--c-blue);
     }
+    
     .hidden-text.revealed::after,
     .hidden-text:hover::after {
       opacity: 0;
@@ -161,36 +181,48 @@
       width: 80%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--c-blue), transparent);
-      margin: 20px auto;
+      margin: 30px auto;
       box-shadow: 0 0 5px var(--c-blue);
+      opacity: 0.7;
     }
 
     .sign-off {
       font-family: 'Share Tech Mono', monospace;
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: var(--c-blue);
-      margin-top: 20px;
+      margin-top: 25px;
       font-weight: bold;
       text-align: left;
+      letter-spacing: 1px;
     }
-
-    /* Removed signature-img styles as it is no longer used */
 
     .status-footer {
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.7rem;
       color: #666;
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
       padding-top: 20px;
       border-top: 1px solid var(--grid-gray);
+      letter-spacing: 1px;
     }
 
-    /* Custom scrollbar */
-    body::-webkit-scrollbar { width: 8px; }
-    body::-webkit-scrollbar-track { background: var(--ink-black); }
-    body::-webkit-scrollbar-thumb { background: #fff; border-radius: 4px; }
-    body::-webkit-scrollbar-thumb:hover { background: #ccc; }
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .letter-paper {
+        padding: 30px 20px;
+        min-height: auto;
+      }
+      .letter-paper::before {
+        left: 20px;
+      }
+      .greeting {
+        font-size: 1.4rem;
+      }
+      .para {
+        font-size: 1.05rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -199,43 +231,40 @@
 <div id="liquid-bg"></div>
 
 <!-- Message Container -->
-<div id="message-container">
-  <div id="message-content">
-    <h1 class="header-title">// STAMFORD_BRIDGE_PROTOCOL</h1>
+<div id="message-content">
+  <h1 class="header-title">// STAMFORD_BRIDGE_PROTOCOL</h1>
 
-    <div class="letter-paper">
-      <div class="dateline">SECURE TRANSMISSION // 2026</div>
+  <div class="letter-paper">
+    <div class="dateline">SECURE TRANSMISSION // 2026</div>
 
-      <div class="greeting">Hey Poppy,</div>
+    <div class="greeting">Hey Poppy,</div>
 
-      <div class="para">
-        I've been meaning to say this for a while and I keep putting it off, so I figured I'd just write it out properly rather than try to say it in person and <span class="hidden-text" onclick="revealHidden(this)">completely lose my words</span>.
-      </div>
+    <div class="para">
+      I've been meaning to say this for a while and I keep putting it off, so I figured I'd just write it out properly rather than try to say it in person and <span class="hidden-text" tabindex="0" onclick="revealHidden(this)" onkeydown="handleKey(event, this)">completely lose my words</span>.
+    </div>
 
-      <div class="para">
-        I like you. I have done for a long time — <span class="hidden-text" onclick="revealHidden(this)">since year 7 actually</span>, which feels a bit mad to say out loud but there it is. I never said anything because honestly I didn't really know how to, and I think part of me kept convincing myself it wasn't the right moment. But I'm not sure that moment ever just appears on its own.
-      </div>
+    <div class="para">
+      I like you. I have done for a long time — <span class="hidden-text" tabindex="0" onclick="revealHidden(this)" onkeydown="handleKey(event, this)">since year 7 actually</span>, which feels a bit mad to say out loud but there it is. I never said anything because honestly I didn't really know how to, and I think part of me kept convincing myself it wasn't the right moment. But I'm not sure that moment ever just appears on its own.
+    </div>
 
-      <div class="para">
-        I'm not writing this to put any pressure on you or make things weird between us. I just think <span class="hidden-text" onclick="revealHidden(this)">you're a genuinely good person</span> and being around you has always been one of the better parts of my day. It felt unfair to keep that to myself forever.
-      </div>
+    <div class="para">
+      I'm not writing this to put any pressure on you or make things weird between us. I just think <span class="hidden-text" tabindex="0" onclick="revealHidden(this)" onkeydown="handleKey(event, this)">you're a genuinely good person</span> and being around you has always been one of the better parts of my day. It felt unfair to keep that to myself forever.
+    </div>
 
-      <div class="para">
-        If you'd ever want to hang out, just the two of us, I'd really like that. And if not, that's completely okay too. I meant it when I said I didn't want things to be weird. <span class="hidden-text" onclick="revealHidden(this)">I just thought you deserved to know.</span>
-      </div>
+    <div class="para">
+      If you'd ever want to hang out, just the two of us, I'd really like that. And if not, that's completely okay too. I meant it when I said I didn't want things to be weird. <span class="hidden-text" tabindex="0" onclick="revealHidden(this)" onkeydown="handleKey(event, this)">I just thought you deserved to know.</span>
+    </div>
 
-      <div class="para">
-        Take your time with this, no rush at all.
-      </div>
+    <div class="para">
+      Take your time with this, no rush at all.
+    </div>
 
-      <div class="divider"></div>
+    <div class="divider"></div>
 
-      <!-- Changed from image signature to text -->
-      <div class="sign-off">From, Alex</div>
+    <div class="sign-off">From, Alex</div>
 
-      <div class="status-footer">
-        END OF TRANSMISSION // STAMFORD_BRIDGE_PROTOCOL
-      </div>
+    <div class="status-footer">
+      END OF TRANSMISSION // STAMFORD_BRIDGE_PROTOCOL
     </div>
   </div>
 </div>
@@ -243,10 +272,13 @@
 <script>
   // --- Liquid particle background ---
   const bg = document.getElementById('liquid-bg');
-  for (let i = 0; i < 40; i++) {
+  const particleCount = 40;
+
+  for (let i = 0; i < particleCount; i++) {
     const drop = document.createElement('div');
     drop.className = 'drop';
     drop.style.left = Math.random() * 100 + 'vw';
+    // Randomize speed and delay for natural look
     drop.style.animationDuration = (4 + Math.random() * 6) + 's';
     drop.style.animationDelay = (Math.random() * 8) + 's';
     drop.style.width = drop.style.height = (2 + Math.random() * 4) + 'px';
@@ -254,12 +286,21 @@
     bg.appendChild(drop);
   }
 
-  // --- Reveal hidden text on tap ---
+  // --- Reveal hidden text ---
   function revealHidden(el) {
-    el.classList.add('revealed');
+    if (!el.classList.contains('revealed')) {
+      el.classList.add('revealed');
+      // Optional: Add a subtle sound effect here if desired
+    }
   }
 
-  // Removed signature fade-in observer as the image is gone
+  // --- Keyboard accessibility handler ---
+  function handleKey(event, el) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); // Prevent scrolling on space
+      revealHidden(el);
+    }
+  }
 </script>
 </body>
 </html>
