@@ -11,7 +11,7 @@ This interactive web experience features a unique **drag-to-unlock** mechanic. U
 - **Content:** A heartfelt, personal message with interactive "hidden text" reveals on hover/tap.
 
 ## 🚀 Live Demo
-https://github.com/kingalexpersonal/confession
+https://kingalexpersonal.github.io/confession/
 
 ## 🛠️ Features
 - **Drag & Drop Unlock:** Custom touch/mouse event handling for a seamless mobile and desktop experience.
